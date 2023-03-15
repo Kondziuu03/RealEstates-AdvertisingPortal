@@ -6,6 +6,7 @@ namespace RealEstates.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime DateOfCreate { get; set; }
         public DateTime DateOfUpdate { get; set; }
         public bool IsPrivateAnnouncement { get; set; }

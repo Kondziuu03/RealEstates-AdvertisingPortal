@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Client\Commands\" />
     <Folder Include="Client\Queries\" />
   </ItemGroup>
 

@@ -59,7 +59,13 @@ ul.client-panel li.nav-item {
 }
 
 .secondary-description {
-    font-size: 20px;
+    font-size: 24px;
+}
+
+.price {
+    font-size: 30px;
+    text-align: right;
+    text-decoration: overline;
 }
 
 img.gallery:hover {

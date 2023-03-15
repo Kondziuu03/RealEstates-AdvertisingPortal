@@ -29,6 +29,7 @@ public static class AnnouncementExtensions
             Id = announcement.Id,
             Name = announcement.Name,
             Description = announcement.Description,
+            PhoneNumber = announcement.PhoneNumber,
             IsPrivateAnnouncement = announcement.IsPrivateAnnouncement,
             IsAccepted = announcement.IsAccepted,
             IsPromoted = announcement.IsPromoted,

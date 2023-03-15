@@ -15,6 +15,11 @@ public class AddAnnouncementCommand : IRequest
     [Display(Name = "Opis")]
     public string Description { get; set; }
 
+    [Required(ErrorMessage = "Pole 'Telefon' jest wymagane")]
+    [Display(Name = "Telefon")]
+    [Phone]
+    public string PhoneNumber { get; set; }
+
     [Display(Name = "Ogłoszenie prywatne")]
     public bool IsPrivateAnnouncement { get; set; }
 

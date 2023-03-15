@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstates.Application.Announcements.Queries.GetAnnouncementsByUser;
-using RealEstates.Application.Client.Commands;
 
 namespace RealEstates.UI.Controllers
 {

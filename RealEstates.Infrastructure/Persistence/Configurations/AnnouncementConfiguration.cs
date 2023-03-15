@@ -23,6 +23,10 @@ class AnnouncementConfiguration : IEntityTypeConfiguration<Announcement>
             .IsRequired()
             .HasMaxLength(150);
 
+        builder.Property(x => x.PhoneNumber)
+            .IsRequired()
+            .HasMaxLength(15);
+
         builder.Property(x => x.UserId)
             .IsRequired();
 

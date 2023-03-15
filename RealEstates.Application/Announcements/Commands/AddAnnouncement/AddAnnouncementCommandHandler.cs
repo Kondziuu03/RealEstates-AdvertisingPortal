@@ -46,6 +46,7 @@ public class AddAnnouncementCommandHandler : IRequestHandler<AddAnnouncementComm
             UserId = request.UserId,
             Name = request.Name,
             Description = request.Description,
+            PhoneNumber = request.PhoneNumber,
             DateOfCreate = _dateTimeService.Now,
             DateOfUpdate = _dateTimeService.Now,
             IsPrivateAnnouncement = request.IsPrivateAnnouncement,

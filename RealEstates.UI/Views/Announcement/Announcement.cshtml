@@ -10,9 +10,12 @@
         <h1 class="text-center">
             @Model.Name
         </h1>
-        <h2 class="text-md-end">
-            Cena: @Model.Price zł
-        </h2>
+        <div class="price">
+            <h2>
+            Cena: @Model.Price zł <br/><br/>
+            Telefon: @Model.PhoneNumber
+            </h2>
+        </div>
     </div>
 </div>
 
