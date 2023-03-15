@@ -1,0 +1,99 @@
+﻿@using RealEstates.Application.Announcements.Commands.AddAnnouncement
+
+@model AddAnnouncementCommand
+
+@{
+    ViewData["Title"] = "Dodawanie ogłoszenia";
+}
+
+<h1 class="text-center mb-4">Dodaj ogłoszenie</h1>
+
+<form asp-action="AddAnnouncement" asp-controller="Announcement" enctype="multipart/form-data" method="post">
+
+    @Html.HiddenFor(x => x.UserId)
+
+
+    <div class="row">
+
+        <div class="col-6">
+            <div class="input-group mb-3">
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder="Nazwa ogłoszenia"})
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="input-group mb-3">
+                @Html.TextBoxFor(x => x.Price, new { @class = "form-control", placeholder="Cena"})
+                @Html.ValidationMessageFor(x => x.Price)
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.Surface, new { @class = "form-control", placeholder="Powierzchnia nieruchomości"})
+            @Html.ValidationMessageFor(x => x.Surface)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.NumberOfRooms, new { @class = "form-control", placeholder="Liczba pokoi"})
+            @Html.ValidationMessageFor(x => x.NumberOfRooms)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.YearOfConstruction, new { @class = "form-control", placeholder="Rok konstrukcji"})
+            @Html.ValidationMessageFor(x => x.YearOfConstruction)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.Country, new { @class = "form-control", placeholder="Kraj"})
+            @Html.ValidationMessageFor(x => x.Country)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.City, new { @class = "form-control", placeholder="Miasto"})
+            @Html.ValidationMessageFor(x => x.City)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.Street, new { @class = "form-control", placeholder="Ulica"})
+            @Html.ValidationMessageFor(x => x.Street)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.StreetNumber, new { @class = "form-control", placeholder="Numer domu"})
+            @Html.ValidationMessageFor(x => x.StreetNumber)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control", placeholder="Kod pocztowy"})
+            @Html.ValidationMessageFor(x => x.ZipCode)
+        </div>
+
+        <div class="input-group mb-3">
+            @Html.TextAreaFor(x => x.Description, new { @class = "form-control", placeholder="Opis"})
+            @Html.ValidationMessageFor(x => x.Description)
+        </div>
+
+
+        <div class="form-check mb-3">
+            @Html.LabelFor(x => x.IsPrivateAnnouncement, new { @class = "form-check-label font-weight-bold" })
+            @Html.CheckBoxFor(x => x.IsPrivateAnnouncement, new { @class = "form-check-input-bg" })
+        </div>
+
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupFile01">Upload</label>
+            <input asp-for="@Model.Files" type="file" multiple class="form-control" id="inputGroupFile01">
+        </div>
+
+        <div class="input-group"></div>
+        <button class="btn btn-success" type="submit">
+            Wyślij do zaakceptowania
+        </button>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    <partial name="Scripts/_ValidationScriptsPartial" />
+}

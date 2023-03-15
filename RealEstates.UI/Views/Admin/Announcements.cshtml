@@ -1,0 +1,121 @@
+﻿@using RealEstates.Application.Announcements.Queries.GetAnnouncement
+@model IEnumerable<AnnouncementDto>
+
+@{
+    ViewData["Title"] = "Nowe ogłoszenia";
+    Layout = $"/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Styles {
+    <partial name="Styles/_DataTablesStyles" />
+}
+
+    <partial name="Modals/_ModalConfirm"
+         model="@(new ModalParams {
+    Id = "modal-confirm-delete",
+    Title = "Potwierdź proszę",
+    Description = "Czy na pewno chcesz usunąć wybrane ogłoszenie?"
+    })" />
+
+    <partial name="Modals/_ModalConfirm"
+         model="@(new ModalParams {
+    Id = "modal-confirm-accept",
+    Title = "Potwierdź proszę",
+    Description = "Czy na pewno chcesz zaakceptować wybrane ogłoszenie?"
+    })" />
+
+
+<partial name="_AnnouncementDataTable" model="@Model" />
+
+
+@section Scripts {
+    <partial name="Scripts/_DataTablesScripts" />
+
+    <script>
+
+        var selectedRow;
+        var selectedAnnouncementId = 0;
+        var announcements;
+
+        $(document).ready(function() {
+            announcements = $('#announcements').DataTable({
+                paging: true,
+                ordering: true,
+                info: true,
+                responive: true,
+                autoWidth: false,
+                lengthChange: true,
+                language: {
+                    url: '/lib/datatables/lang/pl.json'
+                },
+                order: [[0, "asc"]]
+            });
+        });
+
+        function deleteAnnouncement(id, btn) {
+            selectedRow = btn.parentNode.parentNode;
+            selectedAnnouncementId = id;
+            $('#modal-confirm-delete').modal('show');
+        }
+
+        function acceptAnnouncement(id, btn) {
+            selectedRow = btn.parentNode.parentNode;
+            selectedAnnouncementId = id;
+            $('#modal-confirm-accept').modal('show');
+        }
+
+        $('#modal-confirm-delete-btn').on('click', function(e) {
+
+            $('#modal-confirm-delete').modal('hide');
+
+            $.ajax({
+                type: "POST",
+                url: "/Announcement/DeleteAnnouncement",
+                data: {
+                    id: selectedAnnouncementId
+                },
+                success: function(data) {
+                    if (data.success) {
+                        announcements.rows(selectedRow).remove().draw();
+                        toastr.success('Ogłoszenia zostały zaktualizowane.')
+                    }
+                    else
+                        toastr.error('Błąd. ' + data.message);
+                },
+                error: function(data) {
+                    toastr.error('Błąd. Nie udało się usunąć wybranego ogłoszenia');
+                },
+                dataType: "json"
+            });
+
+        });
+
+        $('#modal-confirm-accept-btn').on('click', function(e) {
+
+            $('#modal-confirm-accept').modal('hide');
+
+            $.ajax({
+                type: "POST",
+                url: "/Announcement/AcceptAnnouncement",
+                data: {
+                    id: selectedAnnouncementId
+                },
+                success: function(data) {
+                    if (data.success) {
+                        announcements.rows(selectedRow).remove().draw();
+                        toastr.success('Ogłoszenia zostały zaktualizowane.')
+                    }
+                    else
+                        toastr.error('Błąd. ' + data.message);
+                },
+                error: function(data) {
+                    toastr.error('Błąd. Nie udało się zaakceptować wybranego ogłoszenia');
+                },
+                dataType: "json"
+            });
+
+        });
+
+
+    </script>
+}

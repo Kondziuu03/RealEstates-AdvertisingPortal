@@ -1,0 +1,61 @@
+﻿@using RealEstates.Application.Announcements.Queries.GetAnnouncement
+@model AnnouncementDto
+
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<div class="container mb-5">
+    <div class="row">
+        <h1 class="text-center">
+            @Model.Name
+        </h1>
+        <h2 class="text-md-end">
+            Cena: @Model.Price zł
+        </h2>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="text-center">
+        @foreach (var imageUrl in @Model.ImagesUrl)
+        {
+            <img src="@imageUrl" class="gallery" width="200" height="200" />
+        }
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-5 secondary-description">
+        <div class="col-5">
+            <h4>Opis</h4>
+            <p>
+                @Model.Description
+            </p>
+        </div>
+        <div class="col-4">
+            <h4>Szczegóły ogłoszenia</h4>
+            <p>
+                <ul>
+                    <li>Powierzchnia: @Model.Surface m<sup>2</sup></li>
+                    <li>Liczba pokoi: @Model.NumberOfRooms</li>
+                    <li>Rok budowy: @Model.YearOfConstruction</li>
+                    @if(Model.IsPrivateAnnouncement == true)
+                    {
+                        <li>Ogłoszenie prywatne</li>
+                    }
+                    else
+                    {
+                        <li>Oferta biura nieruchomości</li>
+                    }
+                </ul>
+            </p>
+        </div>
+        <div class="col-3">
+            <h4>Adres</h4>
+            <p>
+                @Model.Country <br /> @Model.City @Model.ZipCode <br /> ul. @Model.Street @Model.StreetNumber
+            </p>
+        </div>
+    </div>
+</div>

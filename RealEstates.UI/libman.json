@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "jsdelivr",
+      "library": "jquery.cookie@1.4.1",
+      "destination": "wwwroot/lib/jquery.cookie/",
+      "files": [
+        "jquery.cookie.min.js"
+      ]
+    },
+    {
+      "library": "dropzone@5.9.3",
+      "destination": "wwwroot/lib/dropzone/",
+      "files": [
+        "min/dropzone.min.js",
+        "dropzone.min.css"
+      ]
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toastr.js/",
+      "files": [
+        "toastr.min.css",
+        "toastr.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "inputmask@4.0.9",
+      "destination": "wwwroot/lib/inputmask/",
+      "files": [
+        "dist/jquery.inputmask.bundle.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/lib/datatables/",
+      "files": [
+        "js/jquery.dataTables.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables.net-bs5@1.13.1",
+      "destination": "wwwroot/lib/datatables.net-bs5/",
+      "files": [
+        "dataTables.bootstrap5.min.js",
+        "dataTables.bootstrap5.min.css"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables.net-responsive-bs5@2.4.0",
+      "destination": "wwwroot/lib/datatables.net-responsive-bs5/",
+      "files": [
+        "responsive.bootstrap5.min.js",
+        "responsive.bootstrap5.min.css"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables-responsive@2.4.0",
+      "destination": "wwwroot/lib/datatables-responsive/",
+      "files": [
+        "dataTables.responsive.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables-buttons@2.3.3",
+      "destination": "wwwroot/lib/datatables-buttons/",
+      "files": [
+        "js/buttons.colVis.min.js",
+        "js/buttons.html5.min.js",
+        "js/buttons.print.min.js",
+        "js/dataTables.buttons.min.js"
+      ]
+    }
+  ]
+}

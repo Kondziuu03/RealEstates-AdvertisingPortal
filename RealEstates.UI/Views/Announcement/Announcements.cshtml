@@ -1,0 +1,105 @@
+﻿@using RealEstates.Application.Announcements.Queries.GetAnnouncement
+@using RealEstates.Application.Dictionaries
+@model IEnumerable<AnnouncementDto>
+@{
+    ViewData["Title"] = "Ogłoszenia";
+}
+
+<div class="container">
+    <h1 class="text-center mb-4">Aktualne ogłoszenia</h1>
+    <div class="card card-primary card-border-top">
+        <div class="card-body">
+            <table id="announcements" class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th width="100">Ogłoszenie</th>
+                        <th>Nazwa</th>
+                        <th>Cena</th>
+                        <th>Miejscowość</th>
+                        <th>Powierzchnia</th>
+                        <th>Data dodania</th>
+                        @if (User.IsInRole(RolesDict.Administrator) || User.IsInRole(RolesDict.Użytkownik))
+                        {
+                            <th>Polubienia</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var announcement in Model)
+                    {
+                        <tr class="announcementData">
+                            <td>
+                                <img src="@announcement.ImagesUrl.FirstOrDefault()" height="100" width="100">
+                            </td>
+                            <td>
+                                <a href='/Announcement/Announcement?id=@announcement.Id'>@announcement.Name</a>
+                            </td>
+                            <td> @announcement.Price zł</td>
+                            <td> @announcement.Country, @announcement.City <br /> @announcement.ZipCode</td>
+                            <td> @announcement.Surface m<sup>2</sup></td>
+                            <td> @announcement.DateOfCreate.ToShortDateString()</td>
+                            @if (User.IsInRole(RolesDict.Administrator) || User.IsInRole(RolesDict.Użytkownik))
+                            {
+                                <td>
+                                    <button class="btn btn-sm btn-success" onclick="LikeAnnouncement('@announcement.Id', this,@announcement.Likes)">
+                                        <b>@announcement.Likes</b> <i class="fa-regular fa-thumbs-up"></i>
+                                    </button>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="Scripts/_DataTablesScripts" />
+
+    <script>
+
+        $(document).ready(function() {
+            $('#announcements').DataTable({
+                paging: true,
+                ordering: false,
+                info: true,
+                responive: true,
+                autoWidth: false,
+                lengthChange: true,
+                language: {
+                    url: '/lib/datatables/lang/pl.json'
+                },
+                order: [[0, "asc"]]
+            });
+        });
+
+        function LikeAnnouncement(id, btn, likes) {
+            selectedAnnouncementId = id;
+            newLikes = likes + 1;
+
+            $.ajax({
+                type: "POST",
+                url: "/Announcement/LikeAnnouncement",
+                data: {
+                    id: selectedAnnouncementId
+                },
+                success: function(data) {
+                    if (data.success) {
+                        $(btn).html('<b>' + newLikes + '</b>' + ' <i class="fa-regular fa-thumbs-up"></i>');
+                        $(btn).css("background", "grey");
+                        $(btn).disabled = true;
+                    }
+                    else
+                        toastr.error('Błąd. ' + data.message);
+                },
+                error: function(data) {
+                    toastr.error('Błąd. Nie udało się usunąć wybranego ogłoszenia');
+                },
+                dataType: "json"
+            });
+        }
+
+    </script>
+}

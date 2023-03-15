@@ -1,0 +1,82 @@
+html {
+    font-size: 16px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+ul.client-panel {
+    width: 100%;
+    font-size: 23px;
+}
+
+ul.client-panel li.nav-item {
+    width: 100%;
+    padding-left: 1rem;
+}
+
+.privacy-police-info {
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    background-color: #464646;
+    width: 100%;
+    color: lightgray;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.privacy-police-btn {
+    font-size: 11px;
+}
+
+.center-div-parent-container {
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.center-div-container {
+    display: table-cell;
+    vertical-align: middle;
+    min-width: 390px;
+}
+
+.bigger-icon {
+    font-size: 28px;
+}
+
+.secondary-description {
+    font-size: 20px;
+}
+
+img.gallery:hover {
+    width: 400px;
+    height: auto;
+    border: 1px solid #777;
+}
+
+div.galleryBackground {
+    background-color: #464646;
+    border: 2px solid;
+}
+
+tr.announcementData {
+    font-size: 20px;
+}
+
+
+
+

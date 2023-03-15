@@ -1,0 +1,99 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Logowanie";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RealEstates</title>
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RealEstates.UI.styles.css" asp-append-version="true" />
+    <style>
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <div class="center-div-parent-container">
+        <div class="center-div-container">
+
+            @if(TempData["ConfirmedEmail"]?.ToString() == "True")
+            {
+                <div class="alert alert-success text-center mb-3" role="alert">
+                    Twoje konto zostało aktywowane. Zaloguj się.
+                </div>
+            }
+
+            <div class="card card-border-top">
+                <h3 class="card-header bg-transparent mt-3 pb-3 text-center">
+                    @ViewBag.Title
+                </h3>
+                <div class="card-body">
+
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <div class="input-group mb-3">
+                            <input asp-for="Input.Email" class="form-control" type="email" placeholder="Adres e-mail"/>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="fas fa-envelope bigger-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        <div class="input-group mb-3">
+                            <input asp-for="Input.Password" class="form-control" type="password" placeholder="Hasło"/>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="fas fa-lock bigger-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-7">
+                                <input type="checkbox" id="RememberMe" />
+                                <label for="RememberMe">Zapamiętaj mnie</label>
+                            </div>
+                            <div class="col-5">
+                                <button type="submit" class="btn btn-primary btn-block">Zaloguj</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <a asp-area="Identity" asp-page="/Account/Register" class="text-center">
+                        Zarejestruj się
+                    </a>
+                    <br/>
+                    <a asp-action="Index" asp-controller="Home" class="text-center">
+                        Strona główna
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery.cookie/jquery.cookie.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

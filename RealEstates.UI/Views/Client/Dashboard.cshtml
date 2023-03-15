@@ -1,0 +1,83 @@
+﻿@using RealEstates.Application.Announcements.Queries.GetAnnouncement
+@model IEnumerable<AnnouncementDto>
+
+@{
+    ViewData["Title"] = "Moje ogłoszenia";
+    Layout = $"/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="Modals/_ModalConfirm"
+         model="@(new ModalParams {
+    Id = "modal-confirm-delete",
+    Title = "Potwierdź proszę",
+    Description = "Czy na pewno chcesz usunąć wybrane ogłoszenie?"
+    })" 
+/>
+
+<h1 class="text-center mb-4">Moje ogłoszenia</h1>
+
+
+<div class="row">
+@foreach (var announcement in Model)
+{
+        <div class="col-3 mb-2" id="@announcement.Name">
+            <div class="card" style="width: 18rem;">
+                <img src="@announcement.ImagesUrl.FirstOrDefault()" class="card-img-top" width="200" height="240">
+                <div class="card-body">
+                    <h5 class="card-title">@announcement.Name</h5>
+                    <a href='/Announcement/Announcement?id=@announcement.Id' class="btn btn-primary">Podgląd</a>
+                    <a href='/Announcement/EditAnnouncement?id=@announcement.Id' class="btn btn-primary">Edytuj</a>
+                    <button class="btn btn-danger" onclick="deleteAnnouncement('@announcement.Id','@announcement.Name',this)">
+                        Usuń
+                    </button>
+                </div>
+            </div>
+        </div>
+}
+</div>
+
+
+@section Scripts {
+    <partial name="Scripts/_DataTablesScripts" />
+
+    <script>
+
+        var selectedElement;
+        var selectedAnnouncementId = 0;
+
+        function deleteAnnouncement(id,announcementName ,btn) {
+            selectedElement = document.getElementById(announcementName);
+            selectedAnnouncementId = id;
+            $('#modal-confirm-delete').modal('show');
+        }
+
+        $('#modal-confirm-delete-btn').on('click', function(e) {
+
+            $('#modal-confirm-delete').modal('hide');
+
+            $.ajax({
+                type: "POST",
+                url: "/Announcement/DeleteAnnouncement",
+                data: {
+                    id: selectedAnnouncementId
+                },
+                success: function (data) {
+                    if (data.success) {
+                        selectedElement.remove().draw();
+                        toastr.success('Ogłoszenia zostały zaktualizowane.');
+                    }
+                    else
+                        toastr.error('Błąd. ' + data.message);
+                },
+                error: function(data) {
+                    toastr.error('Błąd. Nie udało się usunąć wybranego ogłoszenia');
+                },
+                dataType: "json"
+            });
+
+        });
+
+        
+    </script>
+}
+
