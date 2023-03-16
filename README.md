@@ -10,4 +10,14 @@ This is a web application that provides the basic functions of advertising porta
 - Differenet managment panel for admin
 - Admin can manage all announcements
 - Special validation rules for some models
+### To do
+- Add Api for companies with real estates agents and their contacts
+- Add announcements promotion
 ## Technologies
+- Entity Framework
+- FluentValidation
+- MailKit
+- NLog
+- Identity
+- DataTables
+- Toastr
